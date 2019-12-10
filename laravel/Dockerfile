@@ -11,12 +11,10 @@ RUN apt-get update && apt-get install -y \
 	docker-php-ext-install -j$(nproc) gd &&\ 
 	curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer &&\ 
 	chmod +x /usr/local/bin/composer &&\
-	composer -v &&\ 
-	apt-get install --only-upgrade ca-certificates 
-#	wget https://raw.githubusercontent.com/curl/curl/master/lib/mk-ca-bundle.pl &&\ 
-#	chmod 0777 mk-ca-bundle.pl &&\ 
-#	./mk-ca-bundle.pl &&\ 
-#	cp ca-bundle.crt /etc/ssl/certs/ca-certificates.crt -fr 
+	composer -V &&\ 
+	composer config -g repo.packagist composer https://packagist.phpcomposer.com
+# 无法下载可以使用阿里镜像源
+# composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ &&\
 
 # 设置工作区
 WORKDIR /var/www/
